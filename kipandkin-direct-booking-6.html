@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Kip&Kin · Book Direct · Arugam Bay</title>
+<link href="https://fonts.googleapis.com/css2?family=Six+Caps&family=Manrope:wght@300;400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+:root{
+  --void:    #060504;
+  --base:    #0c0a08;
+  --raised:  #141210;
+  --card:    #1a1814;
+  --panel:   #201e18;
+  --lift:    #282420;
+  --line:    rgba(200,180,140,0.1);
+  --line-hi: rgba(200,180,140,0.22);
+  --line-hl: rgba(200,180,140,0.4);
+  --ink:     #f0e8d8;
+  --ink-2:   #c0b09a;
+  --ink-3:   #7a6e60;
+  --clay:    #b05c30;
+  --clay-lt: #ca6e3a;
+  --moss:    #607040;
+  --moss-lt: #788a50;
+  --gilt:    #b8940c;
+  --gilt-lt: #d4aa0e;
+  --rose:    #a87870;
+  --wa:      #1a9948;
+}
+
+body{
+  background:var(--base);color:var(--ink);
+  font-family:'Manrope',sans-serif;font-size:15px;line-height:1.65;
+  min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.76' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
+  opacity:.5;mix-blend-mode:overlay;
+}
+
+@keyframes ascend{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.asc{opacity:0;animation:ascend .6s cubic-bezier(.22,1,.36,1) forwards}
+.a1{animation-delay:.06s}.a2{animation-delay:.14s}.a3{animation-delay:.22s}
+.a4{animation-delay:.30s}.a5{animation-delay:.38s}.a6{animation-delay:.46s}
+.a7{animation-delay:.54s}.a8{animation-delay:.62s}
+
+/* ── MASTHEAD ── */
+.masthead{
+  background:var(--void);border-bottom:1px solid var(--line);
+  padding:52px 24px 44px;text-align:center;position:relative;overflow:hidden;
+}
+.masthead::before{content:'';position:absolute;top:0;left:0;width:56px;height:56px;border-right:1px solid var(--line-hi);border-bottom:1px solid var(--line-hi);}
+.masthead::after {content:'';position:absolute;bottom:0;right:0;width:56px;height:56px;border-left:1px solid var(--line-hi);border-top:1px solid var(--line-hi);}
+.masthead-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 50% 100%,rgba(176,92,48,0.09) 0%,transparent 70%);}
+
+.m-sup{
+  font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:20px;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+}
+.m-sup::before,.m-sup::after{content:'';width:24px;height:1px;background:var(--line-hi);}
+
+.m-name{
+  font-family:'Six Caps',sans-serif;
+  font-size:clamp(5.5rem,20vw,9rem);
+  letter-spacing:.06em;line-height:.88;
+  color:var(--ink);margin-bottom:8px;position:relative;z-index:2;
+  text-shadow:0 2px 40px rgba(176,92,48,0.12);
+}
+.m-amp{color:var(--gilt-lt);}
+
+.m-tag{
+  font-family:'Manrope',sans-serif;font-size:.62rem;font-weight:500;
+  letter-spacing:.55em;text-transform:uppercase;color:var(--rose);opacity:.75;margin-bottom:24px;
+}
+
+.rule-strip{display:inline-flex;border:1px solid var(--line-hi);overflow:hidden;}
+.rule-seg{
+  font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;
+  padding:6px 16px;color:var(--gilt-lt);border-right:1px solid var(--line);
+}
+.rule-seg:last-child{border-right:none;}
+
+.loc-line{
+  display:inline-flex;align-items:center;gap:7px;margin-top:16px;
+  font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);
+}
+.loc-pip{width:4px;height:4px;border-radius:50%;background:var(--clay-lt);flex-shrink:0;}
+
+/* ── LAYOUT ── */
+.wrap{max-width:540px;margin:0 auto;padding:0 18px;}
+
+/* ── INSTAGRAM ── */
+.ig-block{
+  background:var(--raised);border-bottom:1px solid var(--line);
+  padding:38px 24px;text-align:center;position:relative;overflow:hidden;
+}
+.ig-block::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+}
+.ig-ey{
+  font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:14px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.ig-ey::before,.ig-ey::after{content:'';flex:1;max-width:32px;height:1px;background:var(--line-hi);}
+
+.ig-icon{
+  width:54px;height:54px;margin:0 auto 16px;
+  background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  border-radius:14px;display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;box-shadow:0 6px 24px rgba(220,39,67,.2);
+}
+.ig-h{
+  font-family:'Six Caps',sans-serif;
+  font-size:2.6rem;letter-spacing:.04em;line-height:.92;color:var(--ink);margin-bottom:12px;
+}
+.ig-body{font-size:.74rem;color:var(--ink-2);line-height:1.7;max-width:320px;margin:0 auto 20px;}
+.ig-btn{
+  display:inline-flex;align-items:center;gap:9px;
+  background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);
+  padding:12px 28px;font-family:'Manrope',sans-serif;font-size:.75rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:#fff;
+  cursor:pointer;text-decoration:none;border:none;
+  box-shadow:0 5px 20px rgba(220,39,67,.22);transition:transform .15s,box-shadow .15s;
+}
+.ig-btn:hover{transform:translateY(-2px);box-shadow:0 9px 28px rgba(220,39,67,.32);}
+.ig-handle{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--ink-3);letter-spacing:.12em;margin-top:12px;}
+
+/* ── SECTION CAPS ── */
+.sec-cap{padding:44px 0 22px;border-bottom:1px solid var(--line);margin-bottom:28px;}
+.sec-kick{
+  font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--clay-lt);margin-bottom:8px;display:flex;align-items:center;gap:10px;
+}
+.sec-kick::before{content:'';width:16px;height:1px;background:var(--clay);flex-shrink:0;}
+.sec-h{font-family:'Six Caps',sans-serif;font-size:2.8rem;letter-spacing:.04em;line-height:.92;color:var(--ink);}
+.sec-h em{font-style:italic;font-family:'Manrope',sans-serif;font-size:2.1rem;font-weight:800;color:var(--gilt-lt);vertical-align:baseline;}
+.sec-sub{font-size:.72rem;color:var(--ink-2);margin-top:8px;line-height:1.7;}
+
+/* ── FORM ── */
+.form-card{background:var(--card);border:1px solid var(--line);position:relative;}
+.form-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--moss),var(--clay),var(--gilt));opacity:.5;
+}
+.form-body{padding:30px 22px 26px;}
+
+.f-div{
+  display:flex;align-items:center;gap:12px;margin:22px 0 18px;
+  font-family:'DM Mono',monospace;font-size:.49rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3);
+}
+.f-div::before,.f-div::after{content:'';flex:1;height:1px;background:var(--line);}
+
+.fg{display:flex;flex-direction:column;gap:14px;margin-bottom:6px;}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.field{display:flex;flex-direction:column;gap:5px;}
+
+.field label{
+  font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;
+  color:#c8b89a;display:flex;align-items:center;gap:5px;
+}
+.req{color:var(--clay-lt);font-size:.58rem;}
+
+.field input,.field select,.field textarea{
+  background:#221f18;border:1px solid rgba(200,180,140,0.2);
+  padding:13px 15px;font-family:'Manrope',sans-serif;font-size:.9rem;font-weight:500;
+  color:#ede0c8;outline:none;width:100%;
+  transition:border-color .2s,background .2s;
+  -webkit-appearance:none;border-radius:0;line-height:1.4;
+}
+.field input::placeholder,.field textarea::placeholder{color:#6a6050;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(200,180,140,0.5);background:#2a2620;}
+.field select{cursor:pointer;}
+.field select option,.field select optgroup{background:#1a1814;color:#ede0c8;}
+.field textarea{resize:none;height:76px;}
+
+.date-strip{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:end;}
+.date-arr{font-size:.85rem;color:var(--ink-3);text-align:center;padding-bottom:13px;}
+
+.nights-tag{
+  font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.14em;
+  color:var(--gilt-lt);background:rgba(184,148,12,.1);border:1px solid rgba(184,148,12,.2);
+  padding:5px 12px;display:none;margin-top:-8px;margin-bottom:6px;text-align:center;
+}
+
+.send-btn{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  background:var(--wa);border:none;padding:17px 24px;width:100%;cursor:pointer;
+  font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:#fff;text-decoration:none;
+  box-shadow:0 5px 22px rgba(26,153,72,.24);transition:transform .15s,box-shadow .15s,background .15s;margin-top:8px;
+}
+.send-btn:hover{background:#1db352;transform:translateY(-1px);box-shadow:0 9px 30px rgba(26,153,72,.36);}
+.send-btn:active{transform:scale(.99);}
+.wa-svg{width:19px;height:19px;fill:#fff;flex-shrink:0;}
+
+.form-note{
+  font-family:'DM Mono',monospace;font-size:.5rem;color:var(--ink-3);
+  text-align:center;margin-top:12px;letter-spacing:.08em;line-height:1.7;
+}
+
+.info-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin-top:1px;}
+.info-cell{background:var(--panel);padding:14px 10px;text-align:center;}
+.info-val{font-family:'Six Caps',sans-serif;font-size:1.6rem;letter-spacing:.04em;color:var(--ink);line-height:1;}
+.info-key{font-family:'DM Mono',monospace;font-size:.47rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-top:4px;}
+
+/* ── WHY GRID ── */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);margin-bottom:1px;}
+.why-card{background:var(--card);padding:22px 18px;opacity:0;transform:translateY(12px);animation:ascend .5s cubic-bezier(.22,1,.36,1) forwards;}
+.why-card:nth-child(1){animation-delay:.08s}.why-card:nth-child(2){animation-delay:.16s}
+.why-card:nth-child(3){animation-delay:.24s}.why-card:nth-child(4){animation-delay:.32s}
+.why-icon{font-size:1.5rem;display:block;margin-bottom:11px;}
+.why-title{font-family:'Manrope',sans-serif;font-size:.82rem;font-weight:700;color:var(--ink);margin-bottom:5px;}
+.why-desc{font-size:.68rem;color:var(--ink-2);line-height:1.65;}
+
+/* ── DORMS ── */
+.dorm-ref{display:flex;flex-direction:column;gap:1px;background:var(--line);}
+.floor-h{display:flex;align-items:center;gap:12px;background:var(--panel);padding:10px 16px;}
+.fp{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;padding:4px 12px;flex-shrink:0;}
+.fp.g{background:var(--moss);color:#fff;}
+.fp.u{background:var(--clay);color:#fff;}
+.fl{flex:1;height:1px;background:var(--line);}
+.fc{font-family:'DM Mono',monospace;font-size:.49rem;color:var(--ink-3);white-space:nowrap;}
+
+.dorm-row{display:flex;align-items:center;background:var(--card);padding:14px 16px;gap:13px;transition:background .18s;}
+.dorm-row:hover{background:var(--panel);}
+.db{width:3px;align-self:stretch;flex-shrink:0;}
+.db.g{background:var(--moss-lt);}
+.db.f{background:var(--rose);}
+.db.u{background:var(--clay-lt);}
+.dn{font-family:'Six Caps',sans-serif;font-size:1.4rem;letter-spacing:.04em;color:var(--ink);min-width:54px;line-height:1;}
+.dt{font-size:.66rem;color:var(--ink-2);flex:1;line-height:1.4;}
+.dbadge{font-family:'DM Mono',monospace;font-size:.5rem;padding:3px 9px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+.bm{background:rgba(96,112,64,.18);border:1px solid rgba(96,112,64,.35);color:var(--moss-lt);}
+.bf{background:rgba(168,120,112,.12);border:1px solid rgba(168,120,112,.28);color:var(--rose);}
+.bu{background:rgba(176,92,48,.15);border:1px solid rgba(176,92,48,.32);color:var(--clay-lt);}
+
+/* ── FLOATING WA ── */
+.float-wa{
+  position:fixed;bottom:20px;right:16px;z-index:500;
+  display:flex;align-items:center;gap:9px;
+  background:var(--wa);border:none;padding:12px 20px 12px 14px;
+  box-shadow:0 5px 22px rgba(26,153,72,.38);cursor:pointer;text-decoration:none;
+  transition:transform .15s,box-shadow .15s;animation:ascend .45s 1.4s cubic-bezier(.22,1,.36,1) both;
+}
+.float-wa:hover{transform:translateY(-2px);box-shadow:0 9px 28px rgba(26,153,72,.5);}
+.float-wa-txt{font-family:'Manrope',sans-serif;font-size:.68rem;font-weight:700;color:#fff;letter-spacing:.08em;text-transform:uppercase;}
+
+/* ── FOOTER ── */
+.site-footer{background:var(--void);border-top:1px solid var(--line);padding:34px 20px 28px;text-align:center;}
+.footer-name{font-family:'Six Caps',sans-serif;font-size:2.6rem;letter-spacing:.06em;color:var(--ink);}
+.footer-amp{color:var(--gilt-lt);}
+.footer-tag{font-family:'Manrope',sans-serif;font-size:.56rem;font-weight:500;letter-spacing:.5em;text-transform:uppercase;color:var(--rose);margin-top:4px;opacity:.7;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:.46rem;color:var(--ink-3);margin-top:18px;letter-spacing:.1em;}
+</style>
+</head>
+<body>
+
+<header class="masthead asc a1">
+  <div class="masthead-glow"></div>
+  <div class="m-sup">Arugam Bay · Eastern Sri Lanka</div>
+  <div class="m-name">KIP<span class="m-amp">&amp;</span>KIN</div>
+  <div class="m-tag">Bunk &nbsp;·&nbsp; Bond</div>
+  <div class="rule-strip">
+    <div class="rule-seg">Book Direct</div>
+    <div class="rule-seg">Zero Fees</div>
+    <div class="rule-seg">Best Price</div>
+  </div>
+  <div class="loc-line"><div class="loc-pip"></div>300m from the Strip · Steps from Main Point</div>
+</header>
+
+<div class="ig-block asc a2">
+  <div class="ig-ey">Before You Book</div>
+  <div class="ig-icon">📸</div>
+  <div class="ig-h">Tour the Hostel<br>on Instagram</div>
+  <div class="ig-body">Browse our pod dorms, common spaces, free breakfasts and the Arugam Bay atmosphere — so you know exactly where you're staying before you fill the form.</div>
+  <a class="ig-btn" href="https://www.instagram.com/kipnkin_hostel?igsh=NGI4OWJsY2QzeXNl" style="cursor:pointer">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    View Hostel on Instagram
+  </a>
+  <div class="ig-handle">@kipnkin_hostel</div>
+</div>
+
+<div class="wrap">
+
+  <div class="sec-cap asc a3">
+    <div class="sec-kick">Direct Booking</div>
+    <div class="sec-h">Reserve Your <em>Bunk</em></div>
+    <div class="sec-sub">Fill in your details and tap Send — we confirm on WhatsApp within minutes. No payment required now.</div>
+  </div>
+
+  <div class="form-card asc a4">
+    <div class="form-body">
+
+      <div class="f-div">Guest Information</div>
+      <div class="fg">
+        <div class="field">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" id="fullName" placeholder="As on passport">
+        </div>
+        <div class="fr">
+          <div class="field">
+            <label>Passport No. <span class="req">*</span></label>
+            <input type="text" id="passport" placeholder="e.g. N1234567">
+          </div>
+          <div class="field">
+            <label>Nationality <span class="req">*</span></label>
+            <select id="country">
+              <option value="">Select country…</option>
+              <option>Afghanistan</option><option>Albania</option><option>Algeria</option><option>Andorra</option><option>Angola</option><option>Antigua and Barbuda</option><option>Argentina</option><option>Armenia</option><option>Australia</option><option>Austria</option><option>Azerbaijan</option><option>Bahamas</option><option>Bahrain</option><option>Bangladesh</option><option>Barbados</option><option>Belarus</option><option>Belgium</option><option>Belize</option><option>Benin</option><option>Bhutan</option><option>Bolivia</option><option>Bosnia and Herzegovina</option><option>Botswana</option><option>Brazil</option><option>Brunei</option><option>Bulgaria</option><option>Burkina Faso</option><option>Burundi</option><option>Cabo Verde</option><option>Cambodia</option><option>Cameroon</option><option>Canada</option><option>Central African Republic</option><option>Chad</option><option>Chile</option><option>China</option><option>Colombia</option><option>Comoros</option><option>Congo</option><option>Costa Rica</option><option>Croatia</option><option>Cuba</option><option>Cyprus</option><option>Czech Republic</option><option>Denmark</option><option>Djibouti</option><option>Dominica</option><option>Dominican Republic</option><option>Ecuador</option><option>Egypt</option><option>El Salvador</option><option>Equatorial Guinea</option><option>Eritrea</option><option>Estonia</option><option>Eswatini</option><option>Ethiopia</option><option>Fiji</option><option>Finland</option><option>France</option><option>Gabon</option><option>Gambia</option><option>Georgia</option><option>Germany</option><option>Ghana</option><option>Greece</option><option>Grenada</option><option>Guatemala</option><option>Guinea</option><option>Guinea-Bissau</option><option>Guyana</option><option>Haiti</option><option>Honduras</option><option>Hungary</option><option>Iceland</option><option>India</option><option>Indonesia</option><option>Iran</option><option>Iraq</option><option>Ireland</option><option>Israel</option><option>Italy</option><option>Jamaica</option><option>Japan</option><option>Jordan</option><option>Kazakhstan</option><option>Kenya</option><option>Kiribati</option><option>Kuwait</option><option>Kyrgyzstan</option><option>Laos</option><option>Latvia</option><option>Lebanon</option><option>Lesotho</option><option>Liberia</option><option>Libya</option><option>Liechtenstein</option><option>Lithuania</option><option>Luxembourg</option><option>Madagascar</option><option>Malawi</option><option>Malaysia</option><option>Maldives</option><option>Mali</option><option>Malta</option><option>Marshall Islands</option><option>Mauritania</option><option>Mauritius</option><option>Mexico</option><option>Micronesia</option><option>Moldova</option><option>Monaco</option><option>Mongolia</option><option>Montenegro</option><option>Morocco</option><option>Mozambique</option><option>Myanmar</option><option>Namibia</option><option>Nauru</option><option>Nepal</option><option>Netherlands</option><option>New Zealand</option><option>Nicaragua</option><option>Niger</option><option>Nigeria</option><option>North Korea</option><option>North Macedonia</option><option>Norway</option><option>Oman</option><option>Pakistan</option><option>Palau</option><option>Palestine</option><option>Panama</option><option>Papua New Guinea</option><option>Paraguay</option><option>Peru</option><option>Philippines</option><option>Poland</option><option>Portugal</option><option>Qatar</option><option>Romania</option><option>Russia</option><option>Rwanda</option><option>Saint Kitts and Nevis</option><option>Saint Lucia</option><option>Saint Vincent and the Grenadines</option><option>Samoa</option><option>San Marino</option><option>Sao Tome and Principe</option><option>Saudi Arabia</option><option>Senegal</option><option>Serbia</option><option>Seychelles</option><option>Sierra Leone</option><option>Singapore</option><option>Slovakia</option><option>Slovenia</option><option>Solomon Islands</option><option>Somalia</option><option>South Africa</option><option>South Korea</option><option>South Sudan</option><option>Spain</option><option>Sri Lanka</option><option>Sudan</option><option>Suriname</option><option>Sweden</option><option>Switzerland</option><option>Syria</option><option>Taiwan</option><option>Tajikistan</option><option>Tanzania</option><option>Thailand</option><option>Timor-Leste</option><option>Togo</option><option>Tonga</option><option>Trinidad and Tobago</option><option>Tunisia</option><option>Turkey</option><option>Turkmenistan</option><option>Tuvalu</option><option>Uganda</option><option>Ukraine</option><option>United Arab Emirates</option><option>United Kingdom</option><option>United States</option><option>Uruguay</option><option>Uzbekistan</option><option>Vanuatu</option><option>Vatican City</option><option>Venezuela</option><option>Vietnam</option><option>Yemen</option><option>Zambia</option><option>Zimbabwe</option>
+            </select>
+          </div>
+        </div>
+        <div class="fr">
+          <div class="field">
+            <label>Contact Number <span class="req">*</span></label>
+            <input type="tel" id="phone" placeholder="+1 234 567 8900">
+          </div>
+          <div class="field">
+            <label>Email Address <span class="req">*</span></label>
+            <input type="email" id="email" placeholder="you@email.com">
+          </div>
+        </div>
+      </div>
+
+      <div class="f-div">Stay Details</div>
+      <div class="fg">
+        <div class="date-strip">
+          <div class="field">
+            <label>Check-in <span class="req">*</span></label>
+            <input type="date" id="checkIn" onchange="calcNights()">
+          </div>
+          <div class="date-arr">→</div>
+          <div class="field">
+            <label>Check-out <span class="req">*</span></label>
+            <input type="date" id="checkOut" onchange="calcNights()">
+          </div>
+        </div>
+        <div class="nights-tag" id="nightsTag">— nights</div>
+
+        <div class="fr">
+          <div class="field">
+            <label>No. of Guests <span class="req">*</span></label>
+            <input type="number" id="guests" placeholder="1" min="1" max="36">
+          </div>
+          <div class="field">
+            <label>Dorm Room <span class="req">*</span></label>
+            <select id="dorm">
+              <option value="">Select dorm…</option>
+              <optgroup label="── Ground Floor · 4 Beds ──">
+                <option value="Thal — Mixed Pod Dorm · 4 Beds · Ground Floor">Thal · Mixed · 4 Beds</option>
+                <option value="Sippi — Female Pod Dorm · 4 Beds · Ground Floor">Sippi · Female Only · 4 Beds</option>
+                <option value="Maalu — Mixed Pod Dorm · 4 Beds · Ground Floor">Maalu · Mixed · 4 Beds</option>
+              </optgroup>
+              <optgroup label="── Upper Floor · 8 Beds ──">
+                <option value="Rala — Mixed Pod Dorm · 8 Beds · Upper Floor">Rala · Mixed · 8 Beds</option>
+                <option value="Koka — Mixed Pod Dorm · 8 Beds · Upper Floor">Koka · Mixed · 8 Beds</option>
+                <option value="Mora — Mixed Pod Dorm · 8 Beds · Upper Floor">Mora · Mixed · 8 Beds</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Special Requests</label>
+          <textarea id="notes" placeholder="Airport transfer, surf lesson, early check-in, smoothie bowl pre-order…"></textarea>
+        </div>
+      </div>
+
+      <a id="waLink" class="send-btn" href="#">
+        <svg class="wa-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Send Booking Request via WhatsApp
+      </a>
+      <div class="form-note">
+        Opens WhatsApp with your details pre-filled · No payment required now<br>
+        We confirm your bunk within minutes · +94 76 987 2222
+      </div>
+    </div>
+
+    <div class="info-strip">
+      <div class="info-cell"><div class="info-val">36</div><div class="info-key">Total Beds</div></div>
+      <div class="info-cell"><div class="info-val">6</div><div class="info-key">Pod Dorms</div></div>
+      <div class="info-cell"><div class="info-val">24/7</div><div class="info-key">Reception</div></div>
+      <div class="info-cell"><div class="info-val">Free</div><div class="info-key">Breakfast</div></div>
+    </div>
+  </div>
+
+  <div class="sec-cap asc a5" style="padding-top:48px">
+    <div class="sec-kick">Why Book Direct</div>
+    <div class="sec-h">The <em>Advantage</em></div>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-card"><span class="why-icon">💰</span><div class="why-title">Zero Booking Fees</div><div class="why-desc">No OTA commission. What you pay is exactly what we charge — nothing more.</div></div>
+    <div class="why-card"><span class="why-icon">⚡</span><div class="why-title">Instant Confirm</div><div class="why-desc">WhatsApp reply within minutes. Your bunk locked in fast.</div></div>
+    <div class="why-card"><span class="why-icon">🏄</span><div class="why-title">Local Expertise</div><div class="why-desc">Best surf times, hidden spots and tuk-tuk tips — straight from us.</div></div>
+    <div class="why-card"><span class="why-icon">🤝</span><div class="why-title">Personal Service</div><div class="why-desc">Changes handled personally. No bots, no forms, no waiting.</div></div>
+  </div>
+
+  <div class="sec-cap asc a6" style="padding-top:48px">
+    <div class="sec-kick">Our Pod-Based Dormitories</div>
+    <div class="sec-h">Six <em>Rooms</em></div>
+    <div class="sec-sub">All dorms feature pod-style beds, personal lockers, 24/7 AC and Starlink internet.</div>
+  </div>
+
+  <div class="dorm-ref asc a7">
+    <div class="floor-h"><span class="fp g">Ground Floor</span><span class="fl"></span><span class="fc">3 rooms · 12 beds</span></div>
+    <div class="dorm-row"><div class="db g"></div><div class="dn">Thal</div><div class="dt">Mixed Pod Dorm · 4 Beds · Ground Floor</div><span class="dbadge bm">Mixed</span></div>
+    <div class="dorm-row"><div class="db f"></div><div class="dn">Sippi</div><div class="dt">Female Pod Dorm · 4 Beds · Ground Floor</div><span class="dbadge bf">Female</span></div>
+    <div class="dorm-row"><div class="db g"></div><div class="dn">Maalu</div><div class="dt">Mixed Pod Dorm · 4 Beds · Ground Floor</div><span class="dbadge bm">Mixed</span></div>
+    <div class="floor-h"><span class="fp u">Upper Floor</span><span class="fl"></span><span class="fc">3 rooms · 24 beds</span></div>
+    <div class="dorm-row"><div class="db u"></div><div class="dn">Rala</div><div class="dt">Mixed Pod Dorm · 8 Beds · Upper Floor</div><span class="dbadge bu">Mixed</span></div>
+    <div class="dorm-row"><div class="db u"></div><div class="dn">Koka</div><div class="dt">Mixed Pod Dorm · 8 Beds · Upper Floor</div><span class="dbadge bu">Mixed</span></div>
+    <div class="dorm-row"><div class="db u"></div><div class="dn">Mora</div><div class="dt">Mixed Pod Dorm · 8 Beds · Upper Floor</div><span class="dbadge bu">Mixed</span></div>
+  </div>
+
+  <div style="height:64px"></div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-name">KIP<span class="footer-amp">&amp;</span>KIN</div>
+  <div class="footer-tag">Bunk · Bond</div>
+  <div class="footer-copy">ARUGAM BAY · EASTERN SRI LANKA · BOOK DIRECT · ZERO FEES · +94 76 987 2222</div>
+</footer>
+
+
+
+<script>
+// 1. Core calculation for nights
+function calcNights(){
+  var ci = document.getElementById('checkIn').value;
+  var co = document.getElementById('checkOut').value;
+  var tag = document.getElementById('nightsTag');
+  if(ci && co){
+    var d = (new Date(co) - new Date(ci)) / (864e5);
+    if(d > 0){
+      tag.textContent = d + ' night' + (d > 1 ? 's' : '');
+      tag.style.display = 'block';
+      return d;
+    }
+  }
+  tag.style.display = 'none';
+  return 0;
+}
+
+// 2. Set min dates for the calendar
+var today = new Date().toISOString().split('T')[0];
+document.getElementById('checkIn').min = today;
+document.getElementById('checkOut').min = today;
+
+// 3. Logic to update the WhatsApp Link dynamically
+function updateWaLink() {
+  var name = document.getElementById('fullName').value.trim();
+  var pp   = document.getElementById('passport').value.trim();
+  var ctry = document.getElementById('country').value;
+  var ph   = document.getElementById('phone').value.trim();
+  var em   = document.getElementById('email').value.trim();
+  var ci   = document.getElementById('checkIn').value;
+  var co   = document.getElementById('checkOut').value;
+  var gst  = document.getElementById('guests').value.trim();
+  var drm  = document.getElementById('dorm').value;
+  var nte  = document.getElementById('notes').value.trim();
+
+  var fmt = function(d){
+    return d ? new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '';
+  };
+
+  var n = calcNights();
+
+  var msg = '🌊 *Kip&Kin Booking Request*\n━━━━━━━━━━━━━━━━━━━━\n\n';
+  msg += '*Guest Details*\n';
+  msg += '👤 Name: ' + (name || '___') + '\n';
+  msg += '🛂 Passport: ' + (pp || '___') + '\n';
+  msg += '🌍 Nationality: ' + (ctry || '___') + '\n';
+  msg += '📞 Contact: ' + (ph || '___') + '\n';
+  msg += '📧 Email: ' + (em || '___') + '\n\n';
+  msg += '*Stay Details*\n';
+  msg += '📅 Check-in: ' + fmt(ci) + '\n';
+  msg += '📅 Check-out: ' + fmt(co) + '\n';
+  if(n > 0) msg += '🌙 Nights: ' + n + '\n';
+  msg += '👥 Guests: ' + (gst || '___') + '\n';
+  msg += '🛏️ Dorm: ' + (drm || '___') + '\n';
+  if(nte) msg += '\n📝 Requests: ' + nte + '\n';
+  msg += '\n_Booking direct — zero fees, best price_ 🤙';
+
+  document.getElementById('waLink').href = 'https://wa.me/94769872222?text=' + encodeURIComponent(msg);
+}
+
+// 4. Validation check when clicked
+function validateAndSend(e) {
+  var required = ['fullName','passport','country','phone','email','checkIn','checkOut','guests','dorm'];
+  var labels   = ['Full Name','Passport No.','Nationality','Contact No.','Email','Check-in Date','Check-out Date','No. of Guests','Dorm Room'];
+  var missing  = [];
+
+  required.forEach(function(id, i){
+    if(!document.getElementById(id).value.trim()) missing.push(labels[i]);
+  });
+
+  if(missing.length > 0){
+    alert('Please complete:\n\n• ' + missing.join('\n• '));
+    e.preventDefault();
+    return false;
+  }
+  return true;
+}
+
+// 5. Event listeners
+document.querySelectorAll('input, select, textarea').forEach(function(el){
+  el.addEventListener('input', updateWaLink);
+  el.addEventListener('change', updateWaLink);
+});
+
+document.getElementById('checkIn').addEventListener('change', function(){
+  var next = new Date(this.value);
+  next.setDate(next.getDate() + 1);
+  var nd = next.toISOString().split('T')[0];
+  document.getElementById('checkOut').min = nd;
+  if(!document.getElementById('checkOut').value || document.getElementById('checkOut').value <= this.value){
+    document.getElementById('checkOut').value = nd;
+  }
+  updateWaLink();
+});
+
+document.getElementById('waLink').addEventListener('click', validateAndSend);
+
+// 6. Initialise link on page load
+updateWaLink();
+</script>
+</body>
+</html>
